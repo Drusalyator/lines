@@ -176,6 +176,38 @@ class Field:
         if len(ball_for_delete) >= self.balls_in_line:
             return ball_for_delete
         else:
+            ball_for_delete.clear()
+        minus_dx = x
+        minus_dy = y
+        plus_dx = x + 1
+        plus_dy = y + 1
+        while minus_dx >= 0 and minus_dy >= 0 and self.get_color_of_ball(minus_dx, minus_dy) == current_color:
+            ball_for_delete.append((minus_dx, minus_dy))
+            minus_dx -= 1
+            minus_dy -= 1
+        while plus_dx < self.width and plus_dy < self.height and self.get_color_of_ball(plus_dx, plus_dy) == current_color:
+            ball_for_delete.append((plus_dx, plus_dy))
+            plus_dx += 1
+            plus_dy += 1
+        if len(ball_for_delete) >= self.balls_in_line:
+            return ball_for_delete
+        else:
+            ball_for_delete.clear()
+        minus_dx = x
+        plus_dy = y
+        while minus_dx >= 0 and plus_dy < self.height and self.get_color_of_ball(minus_dx, plus_dy) == current_color:
+            ball_for_delete.append((minus_dx, plus_dy))
+            minus_dx -= 1
+            plus_dy += 1
+        plus_dx = x + 1
+        minus_dy = y - 1
+        while plus_dx < self.width and minus_dy >= 0 and self.get_color_of_ball(plus_dx, minus_dy) == current_color:
+            ball_for_delete.append((plus_dx, minus_dy))
+            plus_dx += 1
+            minus_dy -= 1
+        if len(ball_for_delete) >= self.balls_in_line:
+            return ball_for_delete
+        else:
             return
 
     def delete_full_lines(self, array_of_balls_coordinates):

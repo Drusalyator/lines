@@ -8,13 +8,13 @@ logging.basicConfig(filename="lines.log", level=logging.INFO)
 try:
     from core import *
     from driver import *
-except Exception as e:
+except ImportError as e:
     LOGGER.error(e)
     sys.exit(f"Game modules not found: {e}")
 
 try:
     from PyQt5 import QtWidgets, QtGui, QtCore
-except Exception as e:
+except ImportError as e:
     LOGGER.error(e)
     sys.exit(f"PyQt5 not found: {e}")
 
